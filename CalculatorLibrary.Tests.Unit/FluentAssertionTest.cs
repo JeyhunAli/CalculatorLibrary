@@ -5,21 +5,21 @@ using Xunit.Abstractions;
 
 namespace CalculatorLibrary.Tests.Unit
 {
-    public class SkipTest : IAsyncLifetime
+    public class FluentAssertionTest : IAsyncLifetime
     {
         //sut stands for system under test
         private readonly Calculator _sut = new();
         private readonly ITestOutputHelper _outputHelper;
 
         //setup goes here 
-        public SkipTest(ITestOutputHelper outputHelper)
+        public FluentAssertionTest(ITestOutputHelper outputHelper)
         {
             _outputHelper = outputHelper;
             _outputHelper.WriteLine("hello inside ctor");
         }
 
         //parameterization
-        [Theory(Skip = "this is just test")]
+        [Theory]
         [InlineData(10, 10, 20)]
         [InlineData(11, 10, 21)]
         [InlineData(12, 10, 22)]
@@ -44,7 +44,7 @@ namespace CalculatorLibrary.Tests.Unit
         }
 
         [Theory]
-        [InlineData(10, 10, 20, Skip = "this data skipped")]
+        [InlineData(10, 10, 20)]
         [InlineData(11, 10, 21)]
         [InlineData(12, 10, 22)]
         public void Add_ShouldAddTwoNumbers_WhenTwoNumbersAreIntegers3(int a, int b, int expected)
@@ -61,7 +61,7 @@ namespace CalculatorLibrary.Tests.Unit
         }
 
 
-        [Fact(Skip = "this is breaks in CI")]
+        [Fact]
         public void Subtract_ShouldSubtractTwoNumbers_WhenTwoNumbersAreIntegers()
         {
             //Arrange 
@@ -90,4 +90,3 @@ namespace CalculatorLibrary.Tests.Unit
             _outputHelper.WriteLine("hello inside DisposeAsync method  ");
         }
     }
-}
